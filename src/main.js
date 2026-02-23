@@ -17,6 +17,7 @@ let totalHits = 0;
 const PER_PAGE = 15;
 
 // кнопка SEARCH
+
 const form = document.querySelector('.form');
 
 form.addEventListener('submit', onSearch);
