@@ -11,8 +11,8 @@ export async function getImagesByQuery(query, page) {
     q: query,
     image_type: 'photo',
     orientation: 'horizontal',
-    safesearch: 'true',
-    PER_PAGE: 15,
+    safesearch: true,
+    per_page: 15,
     page: page,
   };
   const response = await axios.get(BASE_URL, { params });

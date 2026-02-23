@@ -22,7 +22,7 @@ export function createGallery(images) {
         return `
     <li class="gallery-item">
         <a href="${largeImageURL}">
-            <img src="${webformatURL}" alt="${tags}" ></img></a>
+            <img src="${webformatURL}" alt="${tags}" ></a>
         <div class="info">
      <p>${likes}Likes</p>
             <p> ${views}Views</p>
@@ -50,9 +50,9 @@ export function hideLoader() {
 }
 
 export function showLoadMoreButton() {
-  loadMoreBtn.classList.remove('load-more-hidden');
+  loadMoreBtn.classList.remove('is-hidden');
 }
 
 export function hideLoadMoreButton() {
-  loadMoreBtn.classList.add('load-more-hidden');
+  loadMoreBtn.classList.add('is-hidden');
 }

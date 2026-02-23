@@ -41,24 +41,31 @@ async function onSearch(event) {
 
   try {
     const data = await getImagesByQuery(query, page);
-    createGallery(data.hits);
+
     totalHits = data.totalHits;
+
+    if (data.hits.length === 0) {
+      iziToast.error({
+        message:
+          'Sorry, there are no images matching your search query. Please try again!',
+        position: 'topRight',
+      });
+      return;
+    }
+
+    createGallery(data.hits);
 
     if (page * PER_PAGE < totalHits) {
       showLoadMoreButton();
     } else {
       hideLoadMoreButton();
+
       iziToast.info({
         message: "We're sorry, but you've reached the end of search results.",
       });
     }
-  } catch (error) {
-    iziToast.error({
-      message: 'Something went wrong. Try again later.',
-    });
-    console.log(error);
-  } finally {
-    hideLoader();
+  } catch {
+    error;
   }
 }
 
@@ -66,15 +73,19 @@ async function onSearch(event) {
 const onLoad = document.querySelector('.load-more');
 onLoad.addEventListener('click', onLoadMore);
 async function onLoadMore() {
-  showLoader();
   page++;
-
+  hideLoadMoreButton();
+  showLoader();
   try {
     const data = await getImagesByQuery(currentQuery, page);
 
     createGallery(data.hits);
-    if (page * PER_PAGE >= totalHits) {
+    smoothScroll();
+    if (page * PER_PAGE < totalHits) {
+      showLoadMoreButton();
+    } else {
       hideLoadMoreButton();
+
       iziToast.info({
         message: "We're sorry, but you've reached the end of search results.",
       });

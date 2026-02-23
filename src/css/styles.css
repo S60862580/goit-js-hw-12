@@ -51,7 +51,7 @@
 .gallery-item {
   width: 300px;
   border: 1px solid #808080;
-  border-radius: none;
+  border-radius: 0;
   overflow: hidden;
   background: white;
 }
